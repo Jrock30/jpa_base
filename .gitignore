@@ -10,6 +10,7 @@
 out/
 .gradle
 gradle/
+target/
 
 ### IntelliJ IDEA ###
 .idea
