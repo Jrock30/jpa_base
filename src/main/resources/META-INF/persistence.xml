@@ -17,6 +17,7 @@
             <property name="hibernate.show_sql" value="true"/>      <!-- 쿼리 뿌려주는 옵션-->
             <property name="hibernate.format_sql" value="true"/>    <!-- 포맷팅 해주는 옵-->
             <property name="hibernate.use_sql_comments" value="true"/>  <!-- 코멘트해주는 옵션 /* insert hellojpa.Member */ (주석) -->
+            <!--<property name="hibernate.jdbc.batch_size" value="10"/>--> <!-- 사이즈만큼 한방에 쿼리를 보냄 -->
             <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->   <!-- -->
         </properties>
     </persistence-unit>
