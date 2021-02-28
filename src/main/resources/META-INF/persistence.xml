@@ -18,7 +18,8 @@
             <property name="hibernate.format_sql" value="true"/>    <!-- 포맷팅 해주는 옵-->
             <property name="hibernate.use_sql_comments" value="true"/>  <!-- 코멘트해주는 옵션 /* insert hellojpa.Member */ (주석) -->
             <!--<property name="hibernate.jdbc.batch_size" value="10"/>--> <!-- 사이즈만큼 한방에 쿼리를 보냄 -->
-            <!--<property name="hibernate.hbm2ddl.auto" value="create" />-->   <!-- -->
+            <!-- create, create-drop(생성 후 어플리케이션 종료될 때 드랍됨, 보통 테스트 케이스에 쓰임), update(변경분 반영, 지우는 것은 안됨), validate(정상 매핑되었는지 확인), none은 생략가능 -->
+            <property name="hibernate.hbm2ddl.auto" value="create" />    <!-- 테이블 자 드랍 후 생성(로컬에서만 사용할 것) -->
         </properties>
     </persistence-unit>
 </persistence>

@@ -81,9 +81,37 @@ public class JpaMain {
              * INSERT
              * 객체생성(비영속상태)
              */
-//            Member member = new Member();
-//            member.setId(2L);
-//            member.setName("HelloB");
+            Member member1 = new Member();
+            member1.setUsername("A");
+            member1.setRoleType(RoleType.USER);
+
+            Member member2 = new Member();
+            member2.setUsername("B");
+            member2.setRoleType(RoleType.USER);
+
+            Member member3 = new Member();
+            member3.setUsername("C");
+            member3.setRoleType(RoleType.USER);
+
+            Member member4 = new Member();
+            member4.setUsername("D");
+            member4.setRoleType(RoleType.USER);
+
+            // e.g. allocationSize = 50
+            // DB SEQ = 1       |   1
+            // DB SEQ = 51      |   2
+            // DB SEQ = 51      |   3
+            // allocationSize 시퀀스 사이즈를 원하는 숫자만큼 메모리에 올려 놓고 갯수 만큼 사용 *** 시퀀스 방법 ***
+            // allocationSize = 50'으로 설정하면, (처음 시점에) 애플리케이션 시점 JPA가 메모리에 미리 1~50개를 확보하여 next_val이 51이 되기 전까지는 DB 서버 통신을 하지 않는다.
+            em.persist(member1);//1, 51
+            em.persist(member2);//Memory
+            em.persist(member3);//Memory
+            em.persist(member4);//Memory
+            // .... 51을 만나는 순간 next call 이 호출됨 Hibernate: call next value for MEMBER_SEQ
+
+            System.out.println("member1 = " + member1.getId());
+            System.out.println("member2 = " + member2.getId());
+            System.out.println("member3 = " + member3.getId());
 
             /**
              * SELECT
@@ -110,14 +138,14 @@ public class JpaMain {
              */
 //            List<Member> result = em.createQuery("SELECT m FROM Member AS m", Member.class)
 //                    .getResultList();
-            List<Member> result = em.createQuery("SELECT m FROM Member AS m", Member.class)
-                    .setFirstResult(5) // 페이지네이션(오라클이면 rownum, MYSQL 이면 limit offset 디비에 따라 바뀜)
-                    .setMaxResults(8)
-                    .getResultList();
-
-            for (Member member : result) {
-                System.out.println("member = " + member.getName());
-            }
+//            List<Member> result = em.createQuery("SELECT m FROM Member AS m", Member.class)
+//                    .setFirstResult(5) // 페이지네이션(오라클이면 rownum, MYSQL 이면 limit offset 디비에 따라 바뀜)
+//                    .setMaxResults(8)
+//                    .getResultList();
+//
+//            for (Member member : result) {
+//                System.out.println("member = " + member.getName());
+//            }
 
             /**
              * DELETE
